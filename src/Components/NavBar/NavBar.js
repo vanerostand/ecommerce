@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const NavBarContainer = styled.div`
   display: flex;
@@ -10,26 +11,35 @@ const NavBarContainer = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-const NavBarLogo = styled.div`
+const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
 `;
 
-const NavBarMenu = styled.ul`
+const Menu = styled.ul`
   display: flex;
   list-style: none;
 `;
 
-const NavBarMenuItem = styled.li`
+const Item = styled.li`
   margin-right: 1rem;
-`;  
+  list-style: none;
+  padding: 0.5em;
+`; 
 
-const NavBarProfile = styled.div`
+const StyledLink = styled(Link)`
+  & {
+    color: #000;
+    text-decoration: none;
+  }
+`;
+
+const Profile = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const NavBarProfileImage = styled.img`
+const ProfileImage = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -38,17 +48,19 @@ const NavBarProfileImage = styled.img`
 const NavBar = () => {
   return (
       <NavBarContainer>
-        <NavBarMenu>
-          <NavBarMenuItem>Home</NavBarMenuItem>
-          <NavBarMenuItem>Products</NavBarMenuItem>
-          <NavBarMenuItem>About</NavBarMenuItem>
-          <NavBarMenuItem>Contact</NavBarMenuItem>
-        </NavBarMenu>
-        <NavBarLogo>Logo</NavBarLogo>
-        <NavBarProfile>
-          <NavBarProfileImage src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profile" />
+        <Menu>
+          <Item>
+          <StyledLink to="/">Home</StyledLink>
+          </Item>
+          <Item>Products</Item>
+          <Item>About</Item>
+          <Item>Contact</Item>
+        </Menu>
+        <Logo>Logo</Logo>
+        <Profile>
+          <ProfileImage src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profile" />
           <span>John Doe</span>
-        </NavBarProfile>
+        </Profile>
       </NavBarContainer>
   );
 }

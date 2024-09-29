@@ -9,7 +9,7 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route path="/" component={Home} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </Router>
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar";
 
 const NavBarContainer = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ const NavBar = () => {
           <Item>About</Item>
           <Item>Contact</Item>
         </Menu>
-        <Logo>Logo</Logo>
+        <SearchBar />
         <Profile>
           <ProfileImage src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profile" />
           <span>John Doe</span>

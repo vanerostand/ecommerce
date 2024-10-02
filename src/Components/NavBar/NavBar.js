@@ -17,6 +17,11 @@ const Logo = styled.div`
   font-weight: 700;
 `;
 
+const LogoImage = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+
 const Menu = styled.ul`
   display: flex;
   list-style: none;
@@ -49,11 +54,15 @@ const ProfileImage = styled.img`
 const NavBar = () => {
   return (
       <NavBarContainer>
+        <Logo>
+          <LogoImage src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="logo" />
+        </Logo>
         <Menu>
           <Item>
           <StyledLink to="/">Home</StyledLink>
           </Item>
-          <Item>Products</Item>
+          <Item>
+          <StyledLink to="/product">Products</StyledLink></Item>
           <Item>About</Item>
           <Item>Contact</Item>
         </Menu>

@@ -1,7 +1,7 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect} from "react";
 import styled from 'styled-components';
 import { useDebounce } from "../../Hooks/useDebounce";
+import { ProductContext } from "../../App";
 
 const SearchBarContainer = styled.div`
   display: flex;
@@ -18,6 +18,7 @@ const SearchInput = styled.input`
 `;
 
 const SearchBar = () => {
+  const productContext = useContext(ProductContext);
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
   
@@ -32,7 +33,7 @@ const SearchBar = () => {
       const fetchData = async () => {
         const res = await fetch(baseUrl +'/products?q='+ debouncedSearchTerm);
         const json = await res.json();
-        console.log(json);
+        productContext.setProducts(json);
       };
       fetchData();
     }

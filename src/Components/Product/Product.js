@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import styled from "styled-components";
-import { useFetch } from "../../Hooks/useFetch";
 import { ProductContext } from "../../App";
-
+import { useQuery} from "@tanstack/react-query";
 const CardContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -32,19 +31,27 @@ const Card = styled.div`
 `;
 
 const Product = () => {
-  const { data, error } = useFetch("/products");
   const productContext = useContext(ProductContext);
  
+  const { isError, isLoadind, data: products } = useQuery({
+    queryKey: ['products'],
+    queryFn: async () => {
+      const response = await fetch('http://localhost:5500/products');
+      return (await response.json());
+  }
+  })
+
   useEffect(() => {
-    if (data) {
-      productContext.setProducts(data);
+    if (products) {
+      productContext.setProducts(products);
     }
-  }, [data]);
+  }, [products]);
 
   return (
     <>
     <h1>Products</h1>
-      {error && <p>Error</p>}
+      {isError && <p>Error</p>}
+      {isLoadind && <p>Loading...</p>}
       <CardContainer>
         {productContext.products &&
           productContext.products.map((product) => {

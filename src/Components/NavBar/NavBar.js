@@ -55,7 +55,7 @@ const NavBar = () => {
   return (
       <NavBarContainer>
         <Logo>
-          <LogoImage src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="logo" />
+          <LogoImage src="https://cdn-icons-png.flaticon.com/512/891/891464.png" alt="logo" />
         </Logo>
         <Menu>
           <Item>
@@ -67,10 +67,12 @@ const NavBar = () => {
           <Item>Contact</Item>
         </Menu>
         <SearchBar />
+        <StyledLink to="/login">Login</StyledLink>
         <Profile>
           <ProfileImage src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profile" />
           <span>John Doe</span>
         </Profile>
+        <StyledLink to="/cart">Cart</StyledLink>
       </NavBarContainer>
   );
 }

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import Review from "../Review/Review";
 
 const Container = styled.div`
   display: flex;
@@ -95,48 +96,6 @@ const DefaultImage = styled.img`
   object-fit: cover;
 `;
 
-const ReviewContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: justify;
-  justify-content: justify;
-  text-align: justify;
-  width: 90%;
-  h3 {
-    font-size: 1.2em;
-    margin-bottom: 1em;
-  }
-`;
-
-const ReviewCard = styled.div`
-  flex-direction: column;
-  align-items: justify;
-  justify-content: justify;
-  text-align: justify;
-  border-top: 1px solid #ccc;
-  width: 100%;
-  p {
-    font-size: 1em;
-    margin: 0.5em 0;
-  }
-`;
-
-const LeaveReview = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: justify;
-  justify-content: justify;
-  text-align: justify;
-  border-top: 1px solid #ccc;
-  width: 100%;
-  textarea {
-    width: 99%;
-    height: 100px;
-    border: 1px solid #ccc;
-    border-radius: 0.5em;
-  }
-`;
-
 const TableSpecifications = styled.table`
   width: 90%;
   border-collapse: collapse;
@@ -168,6 +127,12 @@ const ProductDetails = () => {
     setImage(imageUrl);
   };
 
+  useEffect(() => {
+    if (productDetails && productDetails.images.length > 0) {
+      setImage(productDetails.images[0].url);
+    }
+  }, [productDetails]);
+
   return (
     <>
     <h1>Product Details</h1>
@@ -187,7 +152,7 @@ const ProductDetails = () => {
                 </li>
               ))}
           </List>
-          <DefaultImage src={image} alt="" />
+            <DefaultImage src={image} alt="" />
         </LeftPanel>
         <ContainerDetail>
           {productDetails && (
@@ -195,7 +160,6 @@ const ProductDetails = () => {
               <h3>{productDetails.name}</h3>
               <p>{productDetails.description}</p>
               <h3>$ {productDetails.price}</h3>
-              {/* <p>Rate: {startRating(calculateAverageRate(reviews))}</p> */}
               <p>Discount: {productDetails.discount} %</p>
               <p>
                 Final Price: ${" "}
@@ -206,7 +170,7 @@ const ProductDetails = () => {
           )}
         </ContainerDetail>
         <SidePanel>
-          <ButtonOrange >Add to Cart</ButtonOrange>
+          <ButtonOrange>Add to Cart</ButtonOrange>
           <ButtonOrange>Buy Now</ButtonOrange>
           <hr />
           <ButtonOrange >Add to Wishlist</ButtonOrange>
@@ -228,34 +192,7 @@ const ProductDetails = () => {
               ))}
           </tbody>
         </TableSpecifications>
-
-        {/* <ReviewContainer>
-          <h3>Reviews</h3>
-          {reviews &&
-            reviews.map((reviewData) => (
-              <ReviewCard key={reviewData.id}>
-                <p>Rate: {startRating(reviewData.rate)}</p>
-                <p>User: {reviewData.userId}</p>
-                <p>{reviewData.comment}</p>
-              </ReviewCard>
-            ))}
-          <LeaveReview>
-            <form onSubmit={submitReview}>
-              <h3>Leave your own review</h3>
-              <p>Rate: {startRating(rate)} </p>
-              <input
-                type="range"
-                min="1"
-                max="5"
-                name="rate"
-                defaultValue={1}
-                onChange={(e) => setRate(e.target.value)}
-              />
-              <textarea placeholder="Leave a comment..." name="comment" required/>
-              <ButtonOrange type="submit">Submit Review</ButtonOrange>
-            </form>
-          </LeaveReview>
-        </ReviewContainer> */}
+        {productDetails && <Review productId={productDetails.id} />}
       </Container>
     </> 
   );

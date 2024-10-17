@@ -63,8 +63,6 @@ const NavBar = () => {
           </Item>
           <Item>
           <StyledLink to="/product">Products</StyledLink></Item>
-          <Item>About</Item>
-          <Item>Contact</Item>
         </Menu>
         <SearchBar />
         <StyledLink to="/login">Login</StyledLink>
@@ -72,7 +70,8 @@ const NavBar = () => {
           <ProfileImage src="https://randomuser.me/api/portraits/lego/5.jpg" alt="profile" />
           <span>John Doe</span>
         </Profile>
-        <StyledLink to="/cart">Cart</StyledLink>
+        <StyledLink to="/cart">
+          <LogoImage src="https://cdn-icons-png.flaticon.com/512/891/891436.png" alt="cart" /></StyledLink>
       </NavBarContainer>
   );
 }

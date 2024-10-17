@@ -7,6 +7,7 @@ import Product from "./Components/Product/Product";
 import Login from "./Components/Login/Login";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ProductDetails from "./Components/ProductDetails/ProductDetails";
 export const ProductContext = createContext();
 
 const queryClient = new QueryClient({
@@ -27,6 +28,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/product" element={<Product />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/login" element={<Login />} />
             </Routes>
           </Router>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import styled from "styled-components";
 import { ProductContext } from "../../App";
 import { useQuery} from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 const CardContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -32,6 +33,7 @@ const Card = styled.div`
 
 const Product = () => {
   const productContext = useContext(ProductContext);
+  const navigate = useNavigate();
  
   const { isError, isLoadind, data: products } = useQuery({
     queryKey: ['products'],
@@ -47,6 +49,10 @@ const Product = () => {
     }
   }, [products]);
 
+  const handleClick = (id) => {
+    navigate(`/product/${id}`);
+  }
+
   return (
     <>
     <h1>Products</h1>
@@ -56,7 +62,7 @@ const Product = () => {
         {productContext.products &&
           productContext.products.map((product) => {
             return (
-              <Card key={product.id} >
+              <Card key={product.id} onClick={() => handleClick(product.id)}>
                   <h3>{product.name}</h3>
                   <img src={product.images[0].url} alt="" />
                   <p>Description: {product.description}</p>
